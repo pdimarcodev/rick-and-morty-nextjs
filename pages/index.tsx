@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
 
 import Head from "next/head";
+import CharList from "../components/CharList";
 import styles from "../styles/Home.module.css";
 
 const CharsQueryDocument = gql`
@@ -62,25 +63,22 @@ interface CharsVars {
 
 export default function Home() {
   const { data, loading, error } = useQuery<CharactersQuery>(ALL_CHARACTERS);
-
-  if (loading) {
-    return <p>loading...</p>;
-  }
-
-  if (error) {
-    return <p>:( an error happened</p>;
-  }
+  const characters = data?.characters.results;
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Rick and Morty</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      {data?.characters.results.map((character) => (
-        <div key={character.id}>{character.name}</div>
-      ))}
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error.</p>
+      ) : characters && characters.length > 0 ? (
+        <CharList characters={characters} />
+      ) : (
+        <p>No characters loaded.</p>
+      )}
     </div>
   );
 }
