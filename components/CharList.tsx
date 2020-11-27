@@ -1,6 +1,8 @@
 import React from "react";
+import { Grid } from '@material-ui/core';
 
 import { Character } from '../interfaces'
+import CharCard from "./CharCard";
  
 interface Props {
     characters: Character[];
@@ -9,11 +11,11 @@ interface Props {
 const CharList: React.FC<Props> = ({characters}) => { 
 
     return (
-        <ul>
+        <Grid container spacing={10}>
           {characters.map((character) => (
-            <li key={character.id}>{character.name}</li>
+            <CharCard character={character} />
           ))}
-        </ul>
+        </Grid>
       );
 
 };

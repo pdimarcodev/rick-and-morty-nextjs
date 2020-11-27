@@ -1,9 +1,12 @@
 import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/react-hooks";
-
+import { CircularProgress } from "@material-ui/core";
+import { useState, useEffect } from "react";
 import Head from "next/head";
+import React from "react";
 import CharList from "../components/CharList";
-import styles from "../styles/Home.module.css";
+import SearchBox from "../components/SearchBox";
+import { getAllCharacters } from "../resolvers/Characters";
+//import styles from "../styles/Home.module.css";
 
 const CharsQueryDocument = gql`
   query($page: Int) {
@@ -62,22 +65,31 @@ interface CharsVars {
 }
 
 export default function Home() {
-  const { data, loading, error } = useQuery<CharactersQuery>(ALL_CHARACTERS);
+  const [searchField, setSearchField] = useState("");
+  //onst [characters, setCharacters] = useState([]);
+
+  const { data, loading, error } = getAllCharacters();
   const characters = data?.characters.results;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchField(e.target.value);
+    console.log(e.target.value);
+  };
 
   return (
     <div>
       <Head>
         <title>Rick and Morty</title>
       </Head>
+      <SearchBox handleChange={handleChange} />
       {loading ? (
-        <p>Loading...</p>
+        <CircularProgress />
       ) : error ? (
         <p>Error.</p>
       ) : characters && characters.length > 0 ? (
         <CharList characters={characters} />
       ) : (
-        <p>No characters loaded.</p>
+        <p>No data.</p>
       )}
     </div>
   );
