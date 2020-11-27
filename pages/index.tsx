@@ -65,22 +65,24 @@ interface CharsVars {
 }
 
 export default function Home() {
-  const [searchField, setSearchField] = useState("");
-  //onst [characters, setCharacters] = useState([]);
+  const [searchField, setSearchField] = useState<string>("");
 
-  const { data, loading, error } = getAllCharacters();
+  const { data, loading, error } = getAllCharacters(searchField);
   const characters = data?.characters.results;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchField(e.target.value);
-    console.log(e.target.value);
+    if (e.target.value.length > 2) {
+      setSearchField(e.target.value);
+    }
+    //console.log(e.target.value);
   };
 
   return (
-    <div>
+    <>
       <Head>
         <title>Rick and Morty</title>
       </Head>
+
       <SearchBox handleChange={handleChange} />
       {loading ? (
         <CircularProgress />
@@ -91,6 +93,6 @@ export default function Home() {
       ) : (
         <p>No data.</p>
       )}
-    </div>
+    </>
   );
 }

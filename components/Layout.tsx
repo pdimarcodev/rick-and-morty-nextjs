@@ -4,11 +4,11 @@ import Link from "next/Link";
 const Layout: React.FC = ({ children }) => {
   return (
     <div>
-      <Link href="/">
+      {/* <Link href="/">
         <a>
           <img src="/vercel.svg" alt="logo" />
         </a>
-      </Link>
+      </Link> */}
       {children}
     </div>
   );

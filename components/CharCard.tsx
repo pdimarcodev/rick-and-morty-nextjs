@@ -10,7 +10,9 @@ const CharCard: React.FC<Props> = ({ character }) => {
   return (
     <Grid item xs={3}>
       <Paper
-        style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+        style={{ 
+            display: "flex", flexDirection: "column", alignItems: "center", cursor: "pointer" 
+        }}
       >
         <img
           style={{ marginRight: "20px" }}

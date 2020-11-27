@@ -3,8 +3,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { CharactersQuery } from '../interfaces';
 
 const ALL_CHARACTERS = gql`
-  query allCharacters {
-    characters {
+  query ($name: String) {
+    characters (filter: { name: $name} ){
       results {
         id
         name
@@ -14,7 +14,11 @@ const ALL_CHARACTERS = gql`
   }
 `;
 
-export const getAllCharacters = () => {
-const results = useQuery<CharactersQuery>(ALL_CHARACTERS);
+interface CharsVars {
+  name: string;
+}
+
+export const getAllCharacters = (name: string) => {
+const results = useQuery<CharactersQuery, CharsVars>(ALL_CHARACTERS, {variables: {name}});
     return results;
 }
