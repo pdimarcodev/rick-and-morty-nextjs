@@ -40,7 +40,7 @@ const ALL_CHARACTERS = gql`
 `;
 
 interface Character {
-  id: string;
+  id: number;
   name: string;
   image: string;
   type: string;
@@ -71,10 +71,11 @@ export default function Home() {
   const characters = data?.characters.results;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 2) {
-      setSearchField(e.target.value);
+    const {value} = e.target
+    if (value.length > 2 || value == '') {
+      setSearchField(value);
     }
-    //console.log(e.target.value);
+    //console.log(value);
   };
 
   return (

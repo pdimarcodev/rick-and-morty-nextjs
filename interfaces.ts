@@ -12,6 +12,12 @@ export interface Character {
       results: Character[];
     };
   }
+
+export interface CharacterQuery {
+  character: Character;
+  }
+
+
   
  export interface Pages {
     pages: number;
@@ -19,6 +25,10 @@ export interface Character {
     prev: number;
   }
   
-export  interface CharsVars {
-    page: Pages;
+  export interface CharsVars {
+    name: string;
+  }
+  
+  export interface CharVars {
+    id: string; 
   }
