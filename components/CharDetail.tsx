@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Paper, Typography, CircularProgress } from "@material-ui/core";
 
 import { getOneCharacter } from "../resolvers/Characters";
@@ -23,21 +21,21 @@ const CharDetail: React.FC<any> = ({ id }) => {
           }}
         >
           <Typography variant="subtitle1">
-            <b>Name: {character?.name}</b>
+            <b>Name: {character.name}</b>
           </Typography>
           <Typography variant="subtitle2">
-            <b>Type: {character?.type}</b>
+            <b>Type: {character.type}</b>
           </Typography>
           <Typography variant="subtitle2">
-            <b>Gender: {character?.gender}</b>
+            <b>Gender: {character.gender}</b>
           </Typography>
           <Typography variant="subtitle2">
-            <b>Species: {character?.species}</b>
+            <b>Species: {character.species}</b>
           </Typography>
           <img
             style={{ marginRight: "20px" }}
             alt="character"
-            src={character?.image}
+            src={character.image}
           />
         </Paper>
       ) : (

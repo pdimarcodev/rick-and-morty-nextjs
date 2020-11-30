@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "react-modal";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { Character } from "../interfaces";

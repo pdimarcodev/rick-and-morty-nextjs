@@ -1,81 +1,32 @@
-import { gql } from "@apollo/client";
 import { CircularProgress } from "@material-ui/core";
-import { useState, useEffect } from "react";
+import { Pagination } from "@material-ui/lab";
+import { useState } from "react";
 import Head from "next/head";
-import React from "react";
 import CharList from "../components/CharList";
 import SearchBox from "../components/SearchBox";
 import { getAllCharacters } from "../resolvers/Characters";
 //import styles from "../styles/Home.module.css";
 
-const CharsQueryDocument = gql`
-  query($page: Int) {
-    characters(page: $page) {
-      info {
-        pages
-        next
-        prev
-      }
-      results {
-        id
-        name
-        image
-        type
-        gender
-        species
-      }
-    }
-  }
-`;
-
-const ALL_CHARACTERS = gql`
-  query allCharacters {
-    characters {
-      results {
-        id
-        name
-      }
-    }
-  }
-`;
-
-interface Character {
-  id: number;
-  name: string;
-  image: string;
-  type: string;
-  gender: string;
-  species: string;
-}
-
-interface CharactersQuery {
-  characters: {
-    results: Character[];
-  };
-}
-
-interface Pages {
-  pages: number;
-  next: number;
-  prev: number;
-}
-
-interface CharsVars {
-  page: Pages;
-}
-
 export default function Home() {
   const [searchField, setSearchField] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const { data, loading, error } = getAllCharacters(searchField);
+  const { data, loading, error } = getAllCharacters(searchField, currentPage);
+
   const characters = data?.characters.results;
+  const totalPages = data?.characters.info.pages;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {value} = e.target
-    if (value.length > 2 || value == '') {
+    const { value } = e.target;
+    if (value.length > 2 || value === "") {
       setSearchField(value);
-    }
+      setCurrentPage(1);
+      } 
     //console.log(value);
+  };
+
+  const handlePagination = (e: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -94,6 +45,15 @@ export default function Home() {
       ) : (
         <p>No data.</p>
       )}
+
+      <Pagination
+        boundaryCount={3}
+        count={totalPages}
+        onChange={handlePagination}
+        page={currentPage}
+        showFirstButton={true}
+        showLastButton={true}
+      />
     </>
   );
 }

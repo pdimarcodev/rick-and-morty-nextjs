@@ -7,8 +7,9 @@ export interface Character {
     species: string;
   }
   
- export interface CharactersQuery {
+export interface CharactersQuery {
     characters: {
+      info: Pages;
       results: Character[];
     };
   }
@@ -17,8 +18,6 @@ export interface CharacterQuery {
   character: Character;
   }
 
-
-  
  export interface Pages {
     pages: number;
     next: number;
@@ -27,6 +26,7 @@ export interface CharacterQuery {
   
   export interface CharsVars {
     name: string;
+    page: number;
   }
   
   export interface CharVars {
