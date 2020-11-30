@@ -26,6 +26,7 @@ export interface CharacterQuery {
   
   export interface CharsVars {
     name: string;
+    type: string;
     page: number;
   }
   
