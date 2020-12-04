@@ -1,4 +1,4 @@
-import { Grid, Switch } from "@material-ui/core";
+import { Box, Grid, Switch } from "@material-ui/core";
 
 interface Props {
   checked: boolean;
@@ -10,18 +10,27 @@ interface Props {
 
 const SwitchComponent: React.FC<Props> = ({ checked, handleSwitch }) => {
   return (
-    <Grid component="label" container alignItems="center" spacing={1}>
-      <Grid item>Type</Grid>
-      <Grid item>
-        <Switch
-          checked={checked}
-          onChange={handleSwitch}
-          color="secondary"
-          name="checkedName"
-        />
+    <Box height={50}>
+      <Grid
+        item
+        xs={10}
+        component="label"
+        alignItems="center"
+        spacing={1}
+        container
+      >
+        <Grid item>Type</Grid>
+        <Grid item>
+          <Switch
+            checked={checked}
+            onChange={handleSwitch}
+            color="secondary"
+            name="checkedName"
+          />
+        </Grid>
+        <Grid item>Name</Grid>
       </Grid>
-      <Grid item>Name</Grid>
-    </Grid>
+    </Box>
   );
 };
 

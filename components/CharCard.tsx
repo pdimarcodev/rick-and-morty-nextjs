@@ -14,25 +14,28 @@ const CharCard: React.FC<Props> = ({ character }) => {
   const [toggleModal, setToggleModal] = useState(false);
 
   return (
-    <Grid item xs={3}>
-      <Paper
-        onClick={() => setToggleModal(true)}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          cursor: "pointer",
-        }}
-      >
-        <img
-          style={{ marginRight: "20px" }}
-          alt="character"
-          src={character.image}
-        />
-        <Typography variant="subtitle1">
-          <b>{character.name}</b>
-        </Typography>
-      </Paper>
+    <>
+      <Grid item>
+        <Paper
+          onClick={() => setToggleModal(true)}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            cursor: "pointer",
+          }}
+        >
+          <img
+            style={{ marginRight: "20px" }}
+            width="200"
+            alt="character"
+            src={character.image}
+          />
+          <Typography variant="subtitle1">
+            <b>{character.name}</b>
+          </Typography>
+        </Paper>
+      </Grid>
 
       <Modal
         isOpen={toggleModal}
@@ -42,7 +45,7 @@ const CharCard: React.FC<Props> = ({ character }) => {
         <button onClick={() => setToggleModal(false)}>x</button>
         <CharDetail id={character.id} />
       </Modal>
-    </Grid>
+    </>
   );
 };
 
