@@ -46,6 +46,7 @@ export default function Home() {
       <SwitchComponent
         checked={searchBy === "name"}
         handleSwitch={handleSwitch}
+        secondSearch={"Type"}
       />
 
       {loading ? (

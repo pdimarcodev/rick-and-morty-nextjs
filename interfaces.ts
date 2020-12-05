@@ -33,3 +33,41 @@ export interface CharacterQuery {
   export interface CharVars {
     id: string; 
   }
+
+export interface Location {
+  id: string
+  name: string
+  type: string
+  dimension: string
+  residents: Character[]
+}
+
+export interface LocationsQuery {
+  locations: {
+    info: Pages;
+    results: Location[];
+  };
+}
+
+export interface LocationQuery {
+  location: Location;
+  }
+
+  export interface Episode {
+    id: string
+    name: string
+    air_date: string
+    episode: string
+    characters: Character[]
+  }
+  
+  export interface EpisodesQuery {
+    episodes: {
+      info: Pages;
+      results: Episode[];
+    };
+  }
+  
+  export interface EpisodeQuery {
+    episode: Episode;
+    }

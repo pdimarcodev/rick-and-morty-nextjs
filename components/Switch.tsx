@@ -6,9 +6,10 @@ interface Props {
     e: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => void;
+    secondSearch: string;
 }
 
-const SwitchComponent: React.FC<Props> = ({ checked, handleSwitch }) => {
+const SwitchComponent: React.FC<Props> = ({ checked, handleSwitch, secondSearch }) => {
   return (
     <Box height={50}>
       <Grid
@@ -19,7 +20,7 @@ const SwitchComponent: React.FC<Props> = ({ checked, handleSwitch }) => {
         spacing={1}
         container
       >
-        <Grid item>Type</Grid>
+        <Grid item>{secondSearch}</Grid>
         <Grid item>
           <Switch
             checked={checked}
