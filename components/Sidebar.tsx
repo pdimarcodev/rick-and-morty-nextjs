@@ -11,12 +11,12 @@ import {
 
 const Sidebar: React.FC = () => {
   const router = useRouter();
-  const [page, setPage] = useState("/");
+  const [page, setPage] = useState(router.pathname);
 
   const handlePageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    router.push(value);
     setPage(value);
+    router.push(value);
   };
 
   return (

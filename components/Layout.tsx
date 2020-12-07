@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Grid } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import Sidebar from "../components/Sidebar";
 
 const Layout: React.FC = ({ children }) => {
@@ -15,16 +15,22 @@ const Layout: React.FC = ({ children }) => {
       </Head>
 
       <Grid container xs={12} max-width="1200">
+        {/* <Box width="200"> */}
         <Grid item xs={12}>
           <Link href="/">
             <a>
-              <img src="/vercel.svg" alt="logo" />
+              <img src="/rick-and-morty.svg" alt="logo" 
+              width="90%" height="150vh"
+              />
             </a>
           </Link>
         </Grid>
-        <Grid item xs={2}>
-          <Sidebar />
-        </Grid>
+          {/* </Box> */}
+        <Box ml="5">
+          <Grid item xs={2}>
+            <Sidebar />
+          </Grid>
+        </Box>
         {children}
       </Grid>
     </>

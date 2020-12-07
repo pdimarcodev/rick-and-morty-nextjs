@@ -39,9 +39,17 @@ const Locations: React.FC = () => {
     setSearchBy(searchBy === "name" ? "type" : "name");
   };
 
+  const handleClear = () => {
+    setSearchField("");
+    setCurrentPage(1);
+  }
+
   return (
     <Grid xs={10} direction="column" container>
-      <SearchBox handleChange={handleChange} />
+      <SearchBox 
+      handleChange={handleChange}
+      handleClear={handleClear}
+      />
 
       <SwitchComponent
         checked={searchBy === "name"}

@@ -39,10 +39,16 @@ const Episodes: React.FC = () => {
     setSearchBy(searchBy === "name" ? "episode" : "name");
   };
 
+  const handleClear = () => {
+    setSearchField("");
+    setCurrentPage(1);
+  }
+
   return (
     <Grid xs={10} direction="column" container>
       <SearchBox
        handleChange={handleChange}
+       handleClear={handleClear}
         />
 
       <SwitchComponent
