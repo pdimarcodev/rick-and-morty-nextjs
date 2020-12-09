@@ -28,7 +28,7 @@ const LocationCard: React.FC<Props> = ({ location }) => {
           <Typography variant="subtitle1">
             <b>{location.name}</b>
           </Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle2">
             <b>{location.dimension}</b>
           </Typography>
         </Paper>
@@ -39,7 +39,9 @@ const LocationCard: React.FC<Props> = ({ location }) => {
         onRequestClose={() => setToggleModal(false)}
         shouldCloseOnOverlayClick={false}
       >
-        <button onClick={() => setToggleModal(false)}>x</button>
+        <button style={{ color: "red" }} onClick={() => setToggleModal(false)}>
+          x
+        </button>
         <LocationDetail id={location.id} />
       </Modal>
     </>

@@ -1,9 +1,21 @@
 import { useRef } from "react";
 import { Box, Grid, Paper, TextField, Button } from "@material-ui/core";
 
-const SearchBox: React.FC<any> = ({ handleChange, handleClear }) => {
-  
-  let textInput: any = useRef(null);
+interface Props {
+  handleChange: ((e: React.ChangeEvent<HTMLInputElement>) => void);
+  handleClear: () => void;
+}
+
+const SearchBox: React.FC<Props> = ({ handleChange, handleClear }) => {
+
+  let textInput = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    if (textInput.current !== null) {
+      textInput.current.value  = "";
+      }
+      handleClear();
+  }
 
   return (
     <Box>
@@ -17,13 +29,10 @@ const SearchBox: React.FC<any> = ({ handleChange, handleClear }) => {
             label="Search..."
             InputProps={{
               endAdornment: (
-                <Button
-                  onClick={() => {
-                    textInput.current.value = "";
-                    handleClear();
-                  }}
+                <Button  
+                  onClick={handleClick}
                 >
-                  <span>X</span>
+                  <span>&#10761;</span>
                 </Button>
               ),
             }}

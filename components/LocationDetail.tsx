@@ -1,23 +1,31 @@
-import { Paper, Typography, CircularProgress } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
+import Spinner from '../components/Spinner';
 
 import { getOneLocation } from "../resolvers/Locations";
 
-const locationDetail: React.FC<any> = ({ id }) => {
+interface Props {
+  id: string;
+}
+
+const locationDetail: React.FC<Props> = ({ id }) => {
   const { data, loading, error } = getOneLocation(id);
   const location = data?.location;
 
   return (
     <>
       {loading ? (
-        <CircularProgress />
+        <Spinner />
       ) : error ? (
         <p>Error.</p>
       ) : location ? (
         <Paper
+          elevation={10}
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            width: "50vh",
+            margin: "auto"
           }}
         >
           <Typography variant="subtitle1">

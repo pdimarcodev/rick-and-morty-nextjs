@@ -1,23 +1,31 @@
-import { Paper, Typography, CircularProgress } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
+import Spinner from '../components/Spinner';
 
 import { getOneEpisode } from "../resolvers/Episodes";
 
-const EpisodeDetail: React.FC<any> = ({ id }) => {
+interface Props {
+  id: string;
+}
+
+const EpisodeDetail: React.FC<Props> = ({ id }) => {
   const { data, loading, error } = getOneEpisode(id);
   const episode = data?.episode;
 
   return (
     <>
       {loading ? (
-        <CircularProgress />
+        <Spinner />
       ) : error ? (
         <p>Error.</p>
       ) : episode ? (
         <Paper
+          elevation={10}
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            width: "50vh",
+            margin: "auto"
           }}
         >
           <Typography variant="h3">

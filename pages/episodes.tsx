@@ -1,11 +1,11 @@
-import { Grid, CircularProgress } from "@material-ui/core";
 import { useState } from "react";
+import { Grid  } from "@material-ui/core";
 import EpisodeList from "../components/EpisodeList";
 import SearchBox from "../components/SearchBox";
 import SwitchComponent from "../components/Switch";
 import PaginationComponent from "../components/Pagination";
+import Spinner from '../components/Spinner';
 import { getAllEpisodes } from "../resolvers/Episodes";
-//import styles from "../styles/Home.module.css";
 
 const Episodes: React.FC = () => {
   const [searchBy, setSearchBy] = useState("name");
@@ -17,18 +17,16 @@ const Episodes: React.FC = () => {
     searchField,
     currentPage
   );
-  console.log(error);
 
   const episodes = data?.episodes.results;
   const totalPages = data?.episodes.info.pages;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const { value } = e.target as HTMLInputElement;
     if (value.length > 2 || value === "") {
       setSearchField(value);
       setCurrentPage(1);
     }
-    //console.log(value);
   };
 
   const handlePagination = (e: React.ChangeEvent<unknown>, page: number) => {
@@ -58,7 +56,7 @@ const Episodes: React.FC = () => {
       />
 
       {loading ? (
-        <CircularProgress />
+        <Spinner />
       ) : error ? (
         <p>Error.</p>
       ) : episodes && episodes.length > 0 ? (

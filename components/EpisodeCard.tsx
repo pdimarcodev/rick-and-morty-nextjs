@@ -28,7 +28,7 @@ const EpisodeCard: React.FC<Props> = ({ episode }) => {
           <Typography variant="subtitle1">
             <b>{episode.name}</b>
           </Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle2">
             <b>{episode.episode}</b>
           </Typography>
         </Paper>
@@ -39,7 +39,9 @@ const EpisodeCard: React.FC<Props> = ({ episode }) => {
         onRequestClose={() => setToggleModal(false)}
         shouldCloseOnOverlayClick={false}
       >
-        <button onClick={() => setToggleModal(false)}>x</button>
+        <button style={{ color: "red" }} onClick={() => setToggleModal(false)}>
+          x
+        </button>
         <EpisodeDetail id={episode.id} />
       </Modal>
     </>

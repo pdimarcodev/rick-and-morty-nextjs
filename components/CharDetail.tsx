@@ -1,23 +1,31 @@
-import { Paper, Typography, CircularProgress } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
+import Spinner from '../components/Spinner';
 
 import { getOneCharacter } from "../resolvers/Characters";
 
-const CharDetail: React.FC<any> = ({ id }) => {
+interface Props {
+  id: string;
+}
+
+const CharDetail: React.FC<Props> = ({ id }) => {
   const { data, loading, error } = getOneCharacter(id);
   const character = data?.character;
 
   return (
     <>
       {loading ? (
-        <CircularProgress />
+        <Spinner />
       ) : error ? (
         <p>Error.</p>
       ) : character ? (
         <Paper
+          elevation={10}
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            width: "50vh",
+            margin: "auto"
           }}
         >
           <Typography variant="subtitle1">

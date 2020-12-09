@@ -14,16 +14,16 @@ const Sidebar: React.FC = () => {
   const [page, setPage] = useState(router.pathname);
 
   const handlePageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const { value } = e.target as HTMLInputElement;
     setPage(value);
     router.push(value);
   };
 
   return (
-    <Box height={1}>
-      <Grid item>
+    <Box height={1} >
+      <Grid item container justify="center">
         <FormControl>
-          <RadioGroup
+          <RadioGroup 
             name="page"
             onChange={handlePageChange}
           >

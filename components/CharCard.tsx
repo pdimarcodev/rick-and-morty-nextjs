@@ -18,6 +18,7 @@ const CharCard: React.FC<Props> = ({ character }) => {
       <Grid item>
         <Paper
           onClick={() => setToggleModal(true)}
+          elevation={6}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -37,12 +38,14 @@ const CharCard: React.FC<Props> = ({ character }) => {
         </Paper>
       </Grid>
 
-      <Modal
+      <Modal 
         isOpen={toggleModal}
         onRequestClose={() => setToggleModal(false)}
         shouldCloseOnOverlayClick={false}
       >
-        <button onClick={() => setToggleModal(false)}>x</button>
+        <button style={{ color: "red" }} onClick={() => setToggleModal(false)}>
+          x
+        </button>
         <CharDetail id={character.id} />
       </Modal>
     </>

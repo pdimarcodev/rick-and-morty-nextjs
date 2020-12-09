@@ -1,5 +1,22 @@
 import { Box, Grid } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    pagination: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "fixed",
+      left: 0,
+      bottom: 25,
+      padding: 20,
+      backgroundColor: theme.palette.background.paper,
+    },
+  }),
+);
 
 interface Props {
     totalPages: number | undefined;
@@ -8,8 +25,11 @@ interface Props {
 }
 
 const PaginationComponent: React.FC<Props> = ({totalPages, currentPage, handlePagination}) => {
+  const classes = useStyles();
+  
   return (
-    <Box mt={2} mb={2}>
+    
+    <Box className={classes.pagination}>
     <Grid item>
       <Pagination
         boundaryCount={3}
@@ -21,7 +41,7 @@ const PaginationComponent: React.FC<Props> = ({totalPages, currentPage, handlePa
       />
     </Grid>
   </Box>
-  )};
+)};
 
-  export default PaginationComponent;
+export default PaginationComponent;
 
