@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Grid } from "@material-ui/core";
 import CharList from "../components/CharList";
 import SearchBox from "../components/SearchBox";
@@ -6,52 +5,34 @@ import SwitchComponent from "../components/Switch";
 import PaginationComponent from "../components/Pagination";
 import Spinner from '../components/Spinner';
 import { getAllCharacters } from "../resolvers/Characters";
+import { useSearch } from '../hooks/search';
+import { useSwitch } from "../hooks/switch";
+import { usePagination } from "../hooks/pagination";
 
 export default function Home() {
-  const [searchBy, setSearchBy] = useState("name");
-  const [searchField, setSearchField] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const search = useSearch();
+  const switchToggle = useSwitch();
+  const pagination = usePagination(search.setCurrentPage);
 
   const { data, loading, error } = getAllCharacters(
-    searchBy,
-    searchField,
-    currentPage
+    switchToggle.searchBy,
+    search.searchField,
+    search.currentPage
   );
 
   const characters = data?.characters.results;
   const totalPages = data?.characters.info.pages;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    if (value.length > 2 || value === "") {
-      setSearchField(value);
-      setCurrentPage(1);
-    };
-  };
-
-  const handlePagination = (e: React.ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleSwitch = () => {
-    setSearchBy(searchBy === "name" ? "type" : "name");
-  };
-
-  const handleClear = () => {
-    setSearchField("");
-    setCurrentPage(1);
-  }
-
   return (
     <Grid xs={10} direction="column" container>
       <SearchBox
-       handleChange={handleChange} 
-       handleClear={handleClear}
+       handleChange={search.handleChange} 
+       handleClear={search.handleClear}
        />
 
       <SwitchComponent
-        checked={searchBy === "name"}
-        handleSwitch={handleSwitch}
+        checked={switchToggle.searchBy === "name"}
+        handleSwitch={switchToggle.handleSwitch}
         secondSearch={"Type"}
       />
 
@@ -64,8 +45,8 @@ export default function Home() {
           <CharList characters={characters} />
           <PaginationComponent 
             totalPages={totalPages}
-            currentPage={currentPage}
-            handlePagination={handlePagination}
+            currentPage={search.currentPage}
+            handlePagination={pagination.handlePagination}
           />
         </Grid>
       ) : (

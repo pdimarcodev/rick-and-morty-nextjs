@@ -7,15 +7,14 @@ interface Props {
 }
 
 const SearchBox: React.FC<Props> = ({ handleChange, handleClear }) => {
-
   let textInput = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
     if (textInput.current !== null) {
-      textInput.current.value  = "";
-      }
-      handleClear();
-  }
+      textInput.current.value = "";
+    }
+    handleClear();
+  };
 
   return (
     <Box>
@@ -29,9 +28,7 @@ const SearchBox: React.FC<Props> = ({ handleChange, handleClear }) => {
             label="Search..."
             InputProps={{
               endAdornment: (
-                <Button  
-                  onClick={handleClick}
-                >
+                <Button onClick={handleClick}>
                   <span>&#10761;</span>
                 </Button>
               ),
