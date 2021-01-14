@@ -1,4 +1,5 @@
 import { Box, Grid, Switch } from "@material-ui/core";
+import _ from 'lodash';
 
 interface Props {
   checked: boolean;
@@ -20,7 +21,7 @@ const SwitchComponent: React.FC<Props> = ({ checked, handleSwitch, secondSearch 
         spacing={1}
         container
       >
-        <Grid item>{secondSearch}</Grid>
+        <Grid item>{_.capitalize(secondSearch)}</Grid>
         <Grid item>
           <Switch
             checked={checked}

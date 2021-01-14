@@ -19,3 +19,4 @@ export const useSearch = () => {
 
   return { searchField, currentPage, setSearchField, setCurrentPage, handleChange, handleClear };
 };
+ 

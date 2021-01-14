@@ -1,17 +1,15 @@
 import { Grid } from "@material-ui/core";
-import CharList from "../components/CharList";
-import SearchBox from "../components/SearchBox";
-import SwitchComponent from "../components/Switch";
-import PaginationComponent from "../components/Pagination";
-import Spinner from '../components/Spinner';
+import { CharList, ErrorComponent, SearchBox, SwitchComponent, PaginationComponent, Spinner } from '../components';
 import { getAllCharacters } from "../resolvers/Characters";
 import { useSearch } from '../hooks/search';
 import { useSwitch } from "../hooks/switch";
 import { usePagination } from "../hooks/pagination";
 
 export default function Home() {
+  const secondSearch = "type";
+
   const search = useSearch();
-  const switchToggle = useSwitch();
+  const switchToggle = useSwitch(secondSearch);
   const pagination = usePagination(search.setCurrentPage);
 
   const { data, loading, error } = getAllCharacters(
@@ -33,13 +31,13 @@ export default function Home() {
       <SwitchComponent
         checked={switchToggle.searchBy === "name"}
         handleSwitch={switchToggle.handleSwitch}
-        secondSearch={"Type"}
+        secondSearch={secondSearch}
       />
 
       {loading ? (
         <Spinner />
       ) : error ? (
-        <p>Error.</p>
+        <ErrorComponent error={error} />
       ) : characters && characters.length > 0 ? (
         <Grid item>
           <CharList characters={characters} />

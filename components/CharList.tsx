@@ -1,6 +1,6 @@
 import { Box, Grid } from "@material-ui/core";
 import { Character } from "../interfaces";
-import CharCard from "./CharCard";
+import { CharCard } from "../components";
 
 interface Props {
   characters: Character[];

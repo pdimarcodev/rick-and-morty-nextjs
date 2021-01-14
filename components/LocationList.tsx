@@ -1,6 +1,6 @@
 import { Grid } from "@material-ui/core";
 import { Location } from "../interfaces";
-import LocationCard from "./LocationCard";
+import { LocationCard } from "../components";
 
 interface Props {
     locations: Location[];

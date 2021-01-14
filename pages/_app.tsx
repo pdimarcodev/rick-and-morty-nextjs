@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 
 import { client } from "../apollo/client";
 
-import Layout from "../components/Layout";
+import { Layout } from "../components";
 
 import "../styles/globals.css";
 

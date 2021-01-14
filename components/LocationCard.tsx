@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "react-modal";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { Location } from "../interfaces";
-import LocationDetail from "./LocationDetail";
+import { LocationDetail } from "../components";
 
 Modal.setAppElement("#__next");
 

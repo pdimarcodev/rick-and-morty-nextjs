@@ -1,5 +1,5 @@
 import { Paper, Typography } from "@material-ui/core";
-import Spinner from '../components/Spinner';
+import { Spinner } from '../components';
 
 import { getOneEpisode } from "../resolvers/Episodes";
 

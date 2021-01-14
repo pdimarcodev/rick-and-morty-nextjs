@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "react-modal";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { Episode } from "../interfaces";
-import EpisodeDetail from "./EpisodeDetail";
+import { EpisodeDetail } from "../components";
 
 Modal.setAppElement("#__next");
 

@@ -1,6 +1,6 @@
 import { Grid } from "@material-ui/core";
 import { Episode } from "../interfaces";
-import EpisodeCard from "./EpisodeCard";
+import { EpisodeCard } from "../components";
 
 interface Props {
     episodes: Episode[];

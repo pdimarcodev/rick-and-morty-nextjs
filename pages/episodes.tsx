@@ -1,71 +1,50 @@
-import { useState } from "react";
-import { Grid  } from "@material-ui/core";
-import EpisodeList from "../components/EpisodeList";
-import SearchBox from "../components/SearchBox";
-import SwitchComponent from "../components/Switch";
-import PaginationComponent from "../components/Pagination";
-import Spinner from '../components/Spinner';
+import { Grid } from "@material-ui/core";
+import { EpisodeList, ErrorComponent, SearchBox, SwitchComponent, PaginationComponent, Spinner } from '../components';
 import { getAllEpisodes } from "../resolvers/Episodes";
+import { useSearch } from "../hooks/search";
+import { useSwitch } from "../hooks/switch";
+import { usePagination } from "../hooks/pagination";
 
 const Episodes: React.FC = () => {
-  const [searchBy, setSearchBy] = useState("name");
-  const [searchField, setSearchField] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const secondSearch = "episode";
+
+  const search = useSearch();
+  const switchToggle = useSwitch(secondSearch);
+  const pagination = usePagination(search.setCurrentPage);
 
   const { data, loading, error } = getAllEpisodes(
-    searchBy,
-    searchField,
-    currentPage
+    switchToggle.searchBy,
+    search.searchField,
+    search.currentPage
   );
 
   const episodes = data?.episodes.results;
   const totalPages = data?.episodes.info.pages;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    if (value.length > 2 || value === "") {
-      setSearchField(value);
-      setCurrentPage(1);
-    }
-  };
-
-  const handlePagination = (e: React.ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleSwitch = () => {
-    setSearchBy(searchBy === "name" ? "episode" : "name");
-  };
-
-  const handleClear = () => {
-    setSearchField("");
-    setCurrentPage(1);
-  }
-
   return (
     <Grid xs={10} direction="column" container>
       <SearchBox
-       handleChange={handleChange}
-       handleClear={handleClear}
-        />
+        handleChange={search.handleChange}
+        handleClear={search.handleClear}
+      />
 
       <SwitchComponent
-        checked={searchBy === "name"}
-        handleSwitch={handleSwitch}
-        secondSearch={"Episode"}
+        checked={switchToggle.searchBy === "name"}
+        handleSwitch={switchToggle.handleSwitch}
+        secondSearch={secondSearch}
       />
 
       {loading ? (
         <Spinner />
       ) : error ? (
-        <p>Error.</p>
+        <ErrorComponent error={error} />
       ) : episodes && episodes.length > 0 ? (
         <Grid item>
           <EpisodeList episodes={episodes} />
-          <PaginationComponent 
+          <PaginationComponent
             totalPages={totalPages}
-            currentPage={currentPage}
-            handlePagination={handlePagination}
+            currentPage={search.currentPage}
+            handlePagination={pagination.handlePagination}
           />
         </Grid>
       ) : (
@@ -73,7 +52,6 @@ const Episodes: React.FC = () => {
       )}
     </Grid>
   );
-}
-
+};
 
 export default Episodes;

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { Grid } from "@material-ui/core";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components";
 
 const Layout: React.FC = ({ children }) => {
   return (
