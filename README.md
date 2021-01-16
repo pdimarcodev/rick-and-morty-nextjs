@@ -12,6 +12,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+Deploy: [https://zen-archimedes-5d2da5.netlify.app/](https://zen-archimedes-5d2da5.netlify.app/) 
 
 
 ![](screenshots/home.png)
